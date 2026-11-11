@@ -1,4 +1,8 @@
 import { Analytics } from '@vercel/analytics/next'
+import '@fontsource/dm-sans/400.css'
+import '@fontsource/dm-sans/500.css'
+import '@fontsource/dm-sans/700.css'
+import '@fontsource/press-start-2p/400.css'
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
@@ -37,7 +41,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   colorScheme: 'dark',
-  themeColor: '#101713',
+  themeColor: '#222725',
 }
 
 export default function RootLayout({
