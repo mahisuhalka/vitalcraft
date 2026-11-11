@@ -4,6 +4,7 @@ import { redirect } from "next/navigation"
 import { ArrowUpRight, Blocks, LogOut, ShieldCheck, Users } from "lucide-react"
 import { TeamRegistrationForm } from "@/app/dashboard/team-registration-form"
 import { SubmissionWorkflow } from "@/app/dashboard/submission-workflow"
+import { ParticipantResultCard } from "@/components/organizer/participant-result-card"
 import { signOutAction } from "@/app/auth/actions"
 import { eventConfig, type TrackKey } from "@/lib/event-config"
 import { createClient } from "@/lib/supabase/server"
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 }
 
-type SearchParams = Promise<{ track?: string; challenge?: string; registered?: string }>
+type SearchParams = Promise<{ track?: string; challenge?: string; registered?: string; access?: string }>
 
 function readTrack(value: unknown): TrackKey | null {
   return value === "hardware" || value === "software" || value === "open" ? value : null
@@ -37,22 +38,26 @@ export default async function DashboardPage({ searchParams }: { searchParams: Se
 
   if (!user) redirect("/auth/login")
 
-  const [profileResult, teamResult, settingsResult] = await Promise.all([
+  const [profileResult, teamResult, settingsResult, organizerMembershipResult] = await Promise.all([
     supabase.from("profiles").select("full_name, college").eq("id", user.id).maybeSingle(),
     supabase.from("teams").select("id, registration_reference, team_name, college, track, team_size, registered_at").eq("captain_id", user.id).maybeSingle(),
     supabase.from("event_registration_settings").select("registration_opens_at, registration_closes_at, submission_opens_at, submission_closes_at, min_team_size, max_team_size, team_size_confirmed").eq("id", true).maybeSingle(),
+    supabase.from("organizer_members").select("role").eq("user_id", user.id).maybeSingle(),
   ])
 
   const team = teamResult.data
-  const [memberResult, submissionResult] = await Promise.all([
+  const [memberResult, submissionResult, publishedResult] = await Promise.all([
     team
       ? supabase.from("team_members").select("member_name, is_captain").eq("team_id", team.id).order("is_captain", { ascending: false }).order("created_at", { ascending: true })
       : Promise.resolve(null),
     team
       ? supabase.from("idea_submissions").select("id, challenge_id, idea_title, problem_statement, intended_users, proposed_solution, technical_approach, resources_and_stack, planned_mvp, demo_plan, status, updated_at, submitted_at").eq("team_id", team.id).maybeSingle()
       : Promise.resolve(null),
+    team ? supabase.rpc("get_my_submission_result") : Promise.resolve(null),
   ])
   const submission = submissionResult?.data ?? null
+  const publishedResultRow = publishedResult?.data?.[0] ?? null
+  const publishedResultError = Boolean(publishedResult?.error)
   const deckResult = submission
     ? await supabase.from("submission_decks").select("original_filename, file_size_bytes, uploaded_at").eq("submission_id", submission.id).maybeSingle()
     : null
@@ -125,11 +130,14 @@ export default async function DashboardPage({ searchParams }: { searchParams: Se
           </Link>
           <div className="dashboard-account">
             <span>{user.email}</span>
+            {(organizerMembershipResult.data?.role === "admin" || organizerMembershipResult.data?.role === "reviewer") && <Link className="organizer-dashboard-link" href="/organizer">Organizer review</Link>}
             <form action={signOutAction}>
               <button className="account-signout" type="submit"><LogOut size={14} /> Sign out</button>
             </form>
           </div>
         </header>
+
+        {params.access === "organizer" && <p className="account-message account-message-error dashboard-flash" role="alert">Your account does not have organizer access.</p>}
 
         <section className="dashboard-heading">
           <div>
@@ -209,6 +217,9 @@ export default async function DashboardPage({ searchParams }: { searchParams: Se
             windowMessage={submissionWindowMessage}
             loadError={submissionLoadError}
           />
+          {(submission?.status === "submitted" || submission?.status === "under_review") && (
+            <ParticipantResultCard result={publishedResultRow} loadError={publishedResultError} />
+          )}
           </>
         ) : (
           <div className="dashboard-grid">

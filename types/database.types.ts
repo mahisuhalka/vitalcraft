@@ -1,6 +1,9 @@
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[]
 
 type SubmissionStatus = "draft" | "submitted" | "under_review"
+type ReviewDecision = "pending" | "shortlisted" | "waitlisted" | "not_selected"
+type ResultDecision = Exclude<ReviewDecision, "pending">
+type AttendanceResponse = "pending" | "confirmed" | "declined" | "not_applicable"
 type DeckMimeType = "application/pdf" | "application/vnd.openxmlformats-officedocument.presentationml.presentation"
 
 export type Database = {
@@ -14,6 +17,7 @@ export type Database = {
           min_team_size: number
           registration_closes_at: string | null
           registration_opens_at: string | null
+          results_published_at: string | null
           submission_closes_at: string | null
           submission_opens_at: string | null
           team_size_confirmed: boolean
@@ -25,6 +29,7 @@ export type Database = {
           min_team_size?: number
           registration_closes_at?: string | null
           registration_opens_at?: string | null
+          results_published_at?: string | null
           submission_closes_at?: string | null
           submission_opens_at?: string | null
           team_size_confirmed?: boolean
@@ -36,6 +41,7 @@ export type Database = {
           min_team_size?: number
           registration_closes_at?: string | null
           registration_opens_at?: string | null
+          results_published_at?: string | null
           submission_closes_at?: string | null
           submission_opens_at?: string | null
           team_size_confirmed?: boolean
@@ -101,6 +107,18 @@ export type Database = {
         Row: { added_at: string; role: string; user_id: string }
         Insert: { added_at?: string; role: string; user_id: string }
         Update: { added_at?: string; role?: string; user_id?: string }
+        Relationships: []
+      }
+      submission_reviews: {
+        Row: { decision: ReviewDecision; internal_notes: string; reviewer_id: string; submission_id: string; updated_at: string }
+        Insert: { decision?: ReviewDecision; internal_notes?: string; reviewer_id: string; submission_id: string; updated_at?: string }
+        Update: { decision?: ReviewDecision; internal_notes?: string; reviewer_id?: string; submission_id?: string; updated_at?: string }
+        Relationships: []
+      }
+      submission_results: {
+        Row: { attendance_responded_at: string | null; attendance_response: AttendanceResponse; decision: ResultDecision; published_at: string; submission_id: string; team_id: string }
+        Insert: { attendance_responded_at?: string | null; attendance_response?: AttendanceResponse; decision: ResultDecision; published_at?: string; submission_id: string; team_id: string }
+        Update: { attendance_responded_at?: string | null; attendance_response?: AttendanceResponse; decision?: ResultDecision; published_at?: string; submission_id?: string; team_id?: string }
         Relationships: []
       }
       profiles: {
@@ -249,6 +267,60 @@ export type Database = {
         }
         Returns: { registration_reference: string; team_id: string }[]
       }
+      get_organizer_submission_queue: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          challenge_id: string
+          deck_filename: string | null
+          deck_path: string | null
+          demo_plan: string
+          intended_users: string
+          internal_notes: string
+          attendance_response: AttendanceResponse | null
+          registration_reference: string
+          idea_title: string
+          members: Json
+          planned_mvp: string
+          problem_statement: string
+          proposed_solution: string
+          resources_and_stack: string
+          review_decision: ReviewDecision
+          reviewed_at: string | null
+          submission_id: string
+          submission_status: SubmissionStatus
+          submitted_at: string | null
+          team_college: string
+          team_id: string
+          team_name: string
+          team_size: number
+          team_track: string
+          technical_approach: string
+        }[]
+      }
+      get_organizer_registration_overview: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          registered_at: string
+          registration_reference: string
+          submission_status: SubmissionStatus | null
+          team_college: string
+          team_id: string
+          team_name: string
+          team_size: number
+          team_track: string
+        }[]
+      }
+      get_my_submission_result: {
+        Args: Record<PropertyKey, never>
+        Returns: { attendance_responded_at: string | null; attendance_response: AttendanceResponse; decision: ResultDecision; published_at: string }[]
+      }
+      publish_submission_results: { Args: Record<PropertyKey, never>; Returns: string }
+      respond_to_submission_result: { Args: { p_response: string }; Returns: undefined }
+      save_organizer_submission_review: {
+        Args: { p_decision: string; p_internal_notes: string; p_submission_id: string }
+        Returns: undefined
+      }
+      unpublish_submission_results: { Args: Record<PropertyKey, never>; Returns: undefined }
       save_idea_submission: {
         Args: {
           p_challenge_id: string

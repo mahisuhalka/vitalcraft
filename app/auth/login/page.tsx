@@ -17,10 +17,11 @@ function readChallenge(value?: string): string | null {
   return value && eventConfig.challenges.some((challenge) => challenge.id === value) ? value : null
 }
 
-export default async function LoginPage({ searchParams }: { searchParams: Promise<{ track?: string; challenge?: string }> }) {
+export default async function LoginPage({ searchParams }: { searchParams: Promise<{ track?: string; challenge?: string; next?: string }> }) {
   const params = await searchParams
   const track = readTrack(params.track)
   const challenge = readChallenge(params.challenge)
+  const next = params.next === "/organizer" ? "/organizer" : null
 
   return (
     <AuthShell
@@ -28,7 +29,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
       title="Welcome back."
       description="Sign in to return to your team space and event updates."
     >
-      <AuthForm mode="sign-in" track={track} challenge={challenge} />
+      <AuthForm mode="sign-in" track={track} challenge={challenge} next={next} />
     </AuthShell>
   )
 }

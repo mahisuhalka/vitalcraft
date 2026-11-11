@@ -33,6 +33,10 @@ function dashboardPath(track: TrackKey | null, challenge: string | null) {
   return suffix ? `/dashboard?${suffix}` : "/dashboard"
 }
 
+function safeReturnPath(value: FormDataEntryValue | null) {
+  return value === "/organizer" || value === "/dashboard" ? value : null
+}
+
 export async function signInAction(_previousState: AuthFormState, formData: FormData): Promise<AuthFormState> {
   const parsed = z.object({ email: emailSchema, password: passwordSchema }).safeParse({
     email: formData.get("email"),
@@ -71,7 +75,7 @@ export async function signInAction(_previousState: AuthFormState, formData: Form
   }
 
   revalidatePath("/", "layout")
-  redirect(dashboardPath(track, challenge))
+  redirect(safeReturnPath(formData.get("next")) ?? dashboardPath(track, challenge))
 }
 
 export async function signUpAction(_previousState: AuthFormState, formData: FormData): Promise<AuthFormState> {

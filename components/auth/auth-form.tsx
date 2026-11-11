@@ -11,21 +11,24 @@ type Props = {
   mode: "sign-in" | "sign-up"
   track: TrackKey | null
   challenge: string | null
+  next?: string | null
 }
 
-export function AuthForm({ mode, track, challenge }: Props) {
+export function AuthForm({ mode, track, challenge, next }: Props) {
   const isSignUp = mode === "sign-up"
   const action = isSignUp ? signUpAction : signInAction
   const [state, formAction, pending] = useActionState(action, initialState)
   const query = new URLSearchParams()
   if (track) query.set("track", track)
   if (challenge) query.set("challenge", challenge)
+  if (next === "/organizer") query.set("next", next)
   const suffix = query.toString() ? `?${query.toString()}` : ""
 
   return (
     <form className="account-form" action={formAction}>
       {track && <input type="hidden" name="track" value={track} />}
       {challenge && <input type="hidden" name="challenge" value={challenge} />}
+      {next === "/organizer" && <input type="hidden" name="next" value={next} />}
 
       {isSignUp && (
         <label className="account-field">
