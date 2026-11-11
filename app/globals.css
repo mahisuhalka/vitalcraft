@@ -367,6 +367,66 @@ body {
   background-color: var(--background);
   background-image: linear-gradient(180deg, rgba(210, 136, 66, .18), transparent 270px), repeating-linear-gradient(0deg, rgba(222, 199, 150, .035) 0 1px, transparent 1px 38px), repeating-linear-gradient(90deg, rgba(222, 199, 150, .035) 0 1px, transparent 1px 38px);
 }
+
+.submission-panel { grid-column: 1 / -1; margin-top: 18px; }
+.submission-panel-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; }
+.submission-panel-heading h2 { margin: 0; color: #edf4ed; font: 400 clamp(20px, 3vw, 27px)/1.55 var(--pixel); }
+.submission-panel-heading .account-eyebrow { margin: 0 0 10px; }
+.submission-intro { max-width: 680px; margin: 10px 0 0; color: #a7b4a8; font-size: 12px; line-height: 1.7; }
+.submission-status { flex: 0 0 auto; padding: 7px 9px; border: 1px solid #65593c; background: #282419; color: #e3cb8b; font: 8px var(--pixel); }
+.submission-status-complete { border-color: #426446; background: #1a2b1c; color: #a9db9d; }
+.submission-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 24px 0 18px; padding: 0; list-style: none; }
+.submission-steps li { display: flex; align-items: center; gap: 9px; min-width: 0; padding: 10px; border: 1px solid var(--line); background: #171e19; color: #89978c; font-size: 10px; }
+.submission-steps li > span { flex: 0 0 auto; display: grid; place-items: center; width: 23px; height: 23px; border: 1px solid #49564b; color: #aab7ac; font-size: 10px; }
+.submission-steps li b { overflow: hidden; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.submission-steps li.submission-step-complete { border-color: #426446; color: #d1e4cf; }
+.submission-steps li.submission-step-complete > span { border-color: #6e9a61; background: #243626; color: var(--green); }
+.submission-window-note { display: flex; align-items: flex-start; gap: 9px; margin: 0 0 20px; padding: 12px 14px; border: 1px solid #544b36; background: #211f19; color: #e5d8b8; font-size: 11px; line-height: 1.65; }
+.submission-window-note svg { flex: 0 0 auto; margin-top: 1px; color: var(--gold); }
+.submission-panel > .account-message { margin-bottom: 15px; }
+.submission-form { margin: 0; }
+.submission-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; }
+.submission-field-full { grid-column: 1 / -1; }
+.submission-fields .account-field { min-width: 0; }
+.submission-fields .account-field textarea { min-height: 96px; resize: vertical; line-height: 1.65; }
+.submission-fields .account-field > small { color: #93a297; font-size: 10px; }
+.submission-fields .account-field input:disabled, .submission-fields .account-field textarea:disabled, .submission-fields .account-field select:disabled { opacity: .76; cursor: not-allowed; }
+.submission-deck-card { display: flex; justify-content: space-between; align-items: center; gap: 20px; margin-top: 20px; padding: 17px; border: 1px solid var(--line); background: #171e19; }
+.submission-deck-copy { display: flex; align-items: flex-start; gap: 12px; min-width: 0; }
+.submission-deck-icon { flex: 0 0 auto; display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid #52684f; background: #203024; color: var(--green); }
+.submission-deck-copy h3 { margin: 0; color: #e5eee4; font: 700 11px var(--pixel); }
+.submission-deck-copy p { margin: 7px 0 0; color: #a3b0a5; font-size: 10px; line-height: 1.65; }
+.submission-deck-copy .submission-deck-file { display: flex; align-items: center; gap: 6px; overflow-wrap: anywhere; color: #c7ebc4; }
+.submission-deck-file svg { flex: 0 0 auto; }
+.submission-deck-file span { color: #99a79c; }
+.submission-deck-copy .submission-deck-missing { color: #b8a46f; }
+.submission-upload-controls, .submission-deck-actions { display: flex; align-items: center; justify-content: flex-end; gap: 9px; flex-wrap: wrap; }
+.submission-file-input { position: relative; display: flex; align-items: center; width: min(260px, 100%); min-height: 40px; padding: 0 11px; border: 1px solid #3a4b3d; background: #101713; color: #b9c6ba; font-size: 10px; cursor: pointer; }
+.submission-file-input span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.submission-file-input input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+.account-button { min-height: 40px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 0 12px; border: 1px solid #506650; font: 700 10px 'DM Sans', Arial, sans-serif; cursor: pointer; }
+.account-button:disabled { opacity: .5; cursor: not-allowed; }
+.account-button-secondary { background: #1b261e; color: #d3dfd4; }
+.account-button-secondary:not(:disabled):hover { border-color: var(--green); color: var(--green); }
+.account-button-primary { border-color: var(--green); background: var(--green); color: #20281c; }
+.account-button-primary:not(:disabled):hover { background: #d0f495; }
+.submission-actions { display: flex; justify-content: space-between; gap: 12px; margin-top: 20px; padding-top: 17px; border-top: 1px solid var(--line); }
+.submission-privacy { display: flex; align-items: flex-start; gap: 7px; margin: 16px 0 0; color: #91a095; font-size: 10px; line-height: 1.6; }
+.submission-privacy svg { flex: 0 0 auto; margin-top: 1px; color: #a0c99b; }
+
+@media (max-width: 680px) {
+  .submission-panel { padding: 20px; }
+  .submission-panel-heading { flex-direction: column; gap: 12px; }
+  .submission-status { align-self: flex-start; }
+  .submission-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .submission-fields { grid-template-columns: minmax(0, 1fr); }
+  .submission-field-full { grid-column: auto; }
+  .submission-deck-card { align-items: flex-start; flex-direction: column; }
+  .submission-upload-controls, .submission-deck-actions { width: 100%; justify-content: flex-start; }
+  .submission-file-input { width: 100%; }
+  .submission-actions { align-items: stretch; flex-direction: column; }
+  .submission-actions .account-button { width: 100%; }
+}
 .account-panel { border: 2px solid #75664d; background: #303634; box-shadow: 6px 6px 0 #171c19; }
 .account-panel h1, .account-panel h2 { font: 400 clamp(17px, 2.8vw, 24px)/1.65 var(--pixel); letter-spacing: 0; }
 .account-description, .account-field, .account-switch, .dashboard-heading > div > p:last-child, .registration-intro, .member-fields p { color: #e7efe7; }
