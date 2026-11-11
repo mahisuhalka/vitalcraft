@@ -253,15 +253,15 @@ button { color: inherit; }
 }
 :root {
   color-scheme: dark;
-  --background: #222725;
-  --foreground: #f6efdc;
-  --green: #a5d75b;
-  --green-dark: #597d3c;
-  --cyan: #8bd3cf;
-  --gold: #ffb852;
-  --muted: #c5bdab;
-  --line: rgba(242, 211, 158, .2);
-  --panel: #303634;
+  --background: #171d1a;
+  --foreground: #fbfff5;
+  --green: #c0ff52;
+  --green-dark: #6f9f43;
+  --cyan: #70f1e2;
+  --gold: #ffd46a;
+  --muted: #e0e8df;
+  --line: rgba(192, 255, 82, .24);
+  --panel: #242c28;
   --pixel: 'Press Start 2P', monospace;
   --font-sans: 'DM Sans', Arial, Helvetica, sans-serif;
 }
@@ -273,7 +273,8 @@ body {
   font-family: 'DM Sans', Arial, Helvetica, sans-serif;
 }
 
-.site-header { background: rgba(34, 39, 37, .96); border-color: var(--line); }
+.site-header { background: rgba(23, 29, 26, .97); border-color: var(--line); }
+.desktop-nav a { color: #e3eee5; }
 .brand-cube { background: var(--green); box-shadow: 4px 4px 0 #526f36; }
 .brand-name { font-size: 13px; letter-spacing: 0; }
 .brand-name span, .brand-edition { color: var(--gold); }
@@ -303,9 +304,9 @@ body {
 .hero h1 { font: 400 clamp(32px, 4.4vw, 56px)/1.35 var(--pixel); letter-spacing: 0; text-shadow: 4px 4px 0 #171b18; }
 .hero h1 span { color: var(--green); }
 .hero h1 i, .hero-kicker { color: var(--gold); }
-.hero-lede { color: #e2ddcf; }
+.hero-lede { color: #f0f5eb; }
 .hero-meta b { color: #fff4df; }
-.hero-meta small { color: #e0c994; }
+.hero-meta small { color: #ffdf8a; }
 .hero-art { z-index: 1; min-height: 493px; }
 .art-orbit { border-color: rgba(255, 207, 119, .22); }
 .block-scene {
@@ -321,14 +322,14 @@ body {
 .art-label { border-color: #d6a54e; background: #303632; box-shadow: 4px 4px 0 #1d211e; }
 .label-hardware { color: var(--green); }
 .label-software { color: var(--gold); }
-.hero-bottom { color: #d5c79f; border-color: rgba(242, 211, 158, .3); }
+.hero-bottom { color: #ffdf97; border-color: rgba(192, 255, 82, .28); }
 
-.announcement { background: #35342e; border-color: rgba(255, 184, 82, .35); color: #ded6c6; }
+.announcement { background: #252c28; border-color: rgba(255, 212, 106, .45); color: #f5f5e8; }
 .section-index, .eyebrow, .account-eyebrow, .dashboard-security { color: var(--gold); }
 .section h2, .prize-content h2 {
   font: 400 clamp(22px, 3.1vw, 38px)/1.55 var(--pixel);
   letter-spacing: 0;
-  color: #f6efdc;
+  color: #fbfff5;
 }
 .section h2 span, .prize-content h2 span { color: var(--green); }
 .tracks-section, .journey-section { background-color: #292e2b; border-color: rgba(242, 211, 158, .13); }
@@ -336,12 +337,12 @@ body {
 .track-card:hover, .challenge-card:hover { border-color: var(--gold); box-shadow: 6px 7px 0 #171b18; }
 .track-card h3 { font: 400 15px/1.65 var(--pixel); letter-spacing: 0; }
 .challenge-card h3 { font: 400 12px/1.7 var(--pixel); letter-spacing: 0; }
-.track-card > p, .challenge-card > p { color: #d0c9b9; }
-.tag-list span, .track-pill { border-color: #69604c; background: #3a3b32; color: #eee3c7; }
+.track-card > p, .challenge-card > p { color: #e7efe7; }
+.tag-list span, .track-pill { border-color: #706c51; background: #303832; color: #fbf8e9; }
 .software-card .tag-list span { background: #293637; border-color: #516864; color: #c4eeea; }
 .text-link { color: var(--green); font: 700 12px/1.3 'DM Sans', Arial, sans-serif; }
 .text-link:hover { color: #d0f495; }
-.track-footnote { color: #c7bfae; }
+.track-footnote { color: #e1e8dd; }
 .challenge-card-foot { border-color: rgba(242, 211, 158, .2); }
 .open-card { border-style: dashed; background: #34342e; }
 .schedule-wrap, .schedule-item { border-color: #71634a; background: #303634; }
@@ -350,13 +351,13 @@ body {
 .timeline-marker { border-color: #b28b4a; background: #33372e; box-shadow: 4px 4px 0 #1b201d; }
 .timeline-step:last-child .timeline-marker { color: var(--gold); }
 .timeline-content h3, .schedule-item h4 { font-family: var(--pixel); font-weight: 400; line-height: 1.7; }
-.timeline-content p, .section-heading > p { color: #c5bdab; }
+.timeline-content p, .section-heading > p { color: #e0e8df; }
 .prize-section { background: linear-gradient(180deg, #292e2b, #242a27); }
 .faq-item { border-color: #6c604c; background: #2e3431; }
-.faq-item summary { color: #f1e6cf; }
-.faq-item > p, .faq-layout > div:first-child > p { color: #c8c1b1; }
+.faq-item summary { color: #fff8e4; }
+.faq-item > p, .faq-layout > div:first-child > p { color: #e3e9df; }
 .site-footer { background: #1c211f; border-color: var(--line); }
-.footer-tagline, .footer-organizer small, .footer-links a, .footer-bottom { color: #c4bdad; }
+.footer-tagline, .footer-organizer small, .footer-links a, .footer-bottom { color: #dfe9df; }
 .dialog-backdrop { background: rgba(16, 20, 18, .82); }
 .challenge-dialog { border: 2px solid #b28b4a; background: #303634; box-shadow: 7px 7px 0 #161b18; }
 .challenge-dialog h3 { font: 400 17px/1.7 var(--pixel); }
@@ -368,26 +369,26 @@ body {
 }
 .account-panel { border: 2px solid #75664d; background: #303634; box-shadow: 6px 6px 0 #171c19; }
 .account-panel h1, .account-panel h2 { font: 400 clamp(17px, 2.8vw, 24px)/1.65 var(--pixel); letter-spacing: 0; }
-.account-description, .account-field, .account-switch, .dashboard-heading > div > p:last-child, .registration-intro, .member-fields p { color: #d4cdbd; }
-.account-field input, .account-field select { border-color: #76684f; background: #252b28; color: #f6efdc; font-family: 'DM Sans', Arial, sans-serif; }
+.account-description, .account-field, .account-switch, .dashboard-heading > div > p:last-child, .registration-intro, .member-fields p { color: #e7efe7; }
+.account-field input, .account-field select { border-color: #7b895b; background: #1b221f; color: #fbfff5; font-family: 'DM Sans', Arial, sans-serif; }
 .account-field input:focus-visible, .account-field select:focus-visible { outline-color: var(--gold); }
-.account-message, .account-notice { border-color: #776444; background: #393a31; color: #eee4cf; }
+.account-message, .account-notice { border-color: #8a7847; background: #292e27; color: #fff8e4; }
 .account-message-error { border-color: #a4614c; background: #392a26; color: #f4d4c8; }
 .account-message-success { border-color: #6e8e45; background: #30392a; color: #ddedc3; }
-.account-back, .dashboard-account { color: #d1c8b6; }
+.account-back, .dashboard-account { color: #e5eee4; }
 .account-switch a, .account-inline-link { color: var(--green); }
 .dashboard-topbar, .dashboard-footer { border-color: rgba(242, 211, 158, .25); }
 .account-signout { border-color: #76684f; background: #282e2b; color: #efe6d4; }
 .dashboard-heading h1 { font: 400 clamp(17px, 2.6vw, 27px)/1.7 var(--pixel); letter-spacing: 0; }
-.dashboard-security { color: #d7d19a; }
+.dashboard-security { color: #fff082; }
 .dashboard-icon { border-color: #8a744d; background: #3b3c32; color: var(--gold); }
 .team-status { border-color: #6e8e45; background: #30392a; color: #d8edb8; }
 .team-status-pending { border-color: #9b7740; background: #40362b; color: #ffdc9a; }
 .team-reference { border-color: #6e8e45; background: #242a25; color: var(--green); }
 .team-facts div, .member-list li { border-color: rgba(242, 211, 158, .2); background: #292f2c; }
-.team-facts dd, .member-list li { color: #f0e8d7; }
+.team-facts dd, .member-list li { color: #fffbed; }
 .next-step-panel, .proposed-panel, .selected-challenge-panel { background: linear-gradient(145deg, #373932, #2a302d); }
-.registration-fields .account-field small, .registration-footnote, .dashboard-muted { color: #c8bfad; }
+.registration-fields .account-field small, .registration-footnote, .dashboard-muted { color: #dfe9df; }
 .proposed-label { color: var(--gold) !important; }
 .consent-field { color: #ded7c8; }
 .account-submit:disabled { opacity: .72; }
